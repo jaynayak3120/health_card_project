@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { PatientCases } from '../Actions/cases.actions';
 
 function Prescription() {
+
+    const dispatch = useDispatch();
+    useEffect(async () => {
+        dispatch(PatientCases());
+    })
+    const cases = useSelector(state=> state.cases.cases);
+    const prescriptionRow= cases.map( (preData)=> {
+        if(preData.prescDetail!=null) {
+        return(
+            <div className="Presc">
+                <div className= "presc-header">
+                    <div>{JSON.stringify(preData.dateOfPrescription)}</div>
+                    <div>{JSON.stringify(preData.docID)}</div>
+                </div>
+                {JSON.stringify(preData.prescDetail)}
+            </div>
+        );}
+    });
+
     return(
         <div>
+            {prescriptionRow}
             <div className="Presc">
                 <div className= "presc-header">
                     <div>02 Feb 2021</div>

@@ -5,7 +5,12 @@ class Home extends Component {
     render() {
         return(
             <div className="container">
-                <h2>Home</h2><hr />
+                <div className="row mt-2">
+                    <h2 className='col-4'>Home</h2>
+                    
+                    <div className='offset-6 col-2 mt-2'><strong><h4>dr. Jay Nayak</h4></strong></div>
+                </div>
+                <hr />
                 <div className="row">
                     <div className="col-md-4 mb-3">
                         <Form className="mt-2" onSubmit={this.handleLogin}>
@@ -14,12 +19,12 @@ class Home extends Component {
                                 <Input type="text" id="userid" name="userid" placeholder="Patient Id" 
                                     innerRef = {(input) => this.useid = input} />
                             </FormGroup>
-                            <FormGroup>
+                            {/*<FormGroup>
                                 <Label htmlFor="userPass">Enter OTP</Label>
                                 <Input type="password" id="userPass" name="userPass" placeholder="OTP" 
                                     innerRef = {(input) => this.userPass = input} />
-                            </FormGroup>
-                            <Button type="submit" className="btn mt-2 btn-primary" value="submit">Login</Button>
+                            </FormGroup>*/}
+                            <Button type="submit" className="btn mt-2"  color="primary" value="submit">Enter</Button>
                         </Form>
                     </div>
                     
@@ -38,7 +43,7 @@ class Home extends Component {
                                         </FormGroup>
                                     </div>
                                     <div className="col-md-4">
-                                        <Button type="submit" className="btn mt-2 btn-primary" value="submit"><span className="fa fa-search"></span>Search</Button>
+                                        <Button color="primary" type="submit" className="btn mt-2 btn-primary" value="submit"><span className="fa fa-search"></span>Search</Button>
                                     </div>
                                 </div>
                             </Form> 
