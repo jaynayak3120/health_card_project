@@ -28,6 +28,7 @@ export default function authReducer(state = initialState, action) {
         case authConstant.LOGIN_REQUEST:
             return { ...state, authenticating: true }
         case authConstant.LOGIN_SUCCESS:
+            console.log('reducer',{ ...state, authenticate: true, authenticating: false, ...action.payload });
             return { ...state, authenticate: true, authenticating: false, ...action.payload }
         case authConstant.LOGIN_FAILURE:
             return { ...state, authenticate: false, authenticating: false, ...action.payload }

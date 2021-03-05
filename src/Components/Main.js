@@ -4,6 +4,7 @@ import Login from './Login';
 import Patient from './Patient';
 import NavHealth from './Nav';
 import Doc from './HomeComponent';
+import DocPatient from './DocPatient';
 
 function Main() {
   return (
@@ -14,7 +15,8 @@ function Main() {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/patient" component={Patient} />
-            <Route path="/doctor" component={Doc} />
+            <Route path="/doctor" exact component={Doc} />
+            <Route path="/doctor/patient" component={DocPatient} />
             <Redirect to="/login" />
           </Switch>
         </div>

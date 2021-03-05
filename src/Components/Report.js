@@ -1,7 +1,37 @@
-import React from 'react';
+import { Button } from 'reactstrap';
+import React, { useState } from 'react';
 import { Table } from 'reactstrap';
+import axiosInstant from '../axios'
 
 function Report() {
+    const [pdfData, setPDFData] = useState(null);
+
+    const getData = () => {
+        const params = "D://NodeJS//healthcard-backend//src//reports//Heart_Report.pdf"
+        console.log(params);
+        const url = {
+            reportID: 180108002,
+            report: 1
+        }
+        axiosInstant.get(`lab/downloadfile/`+ '180108005/0', {
+            responseType: 'arraybuffer',
+            headers: {
+                Accept: 'application/pdf',
+            },
+        }).then(resp => {
+            setPDFData(resp.data)
+            console.log(pdfData);
+            const file = new Blob([pdfData],{ type: "application/pdf", filename: 'sample.pdf' , __filename: "sample.pdf" });
+            const fileUrl = URL.createObjectURL(file);
+            //window.open(fileUrl, '_blank')
+            console.log(resp);
+            console.log('Done')
+        })
+        .catch(e => {
+            console.log('Done')
+            console.log(e)
+        })
+    }
 
     return(
         <Table striped hover>
@@ -14,35 +44,16 @@ function Report() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">348539039</th>
-                    <td>07/01/2017</td>
+                <tr className='tableRow'>
+                    <th scope="row" className=''>348539039</th>
+                    <td className=''>07/01/2017</td>
                     <td> 
-                        <object data='D:\Certificates\Coursera Bootstrap4.pdf' type='aplication/pdf' width='100%' height='100%'>
-                        <iframe src="D:\Certificates\Coursera Bootstrap4.pdf" width="100%" height="100%"></iframe>
-                        </object>
+                        <Button color='primary' className='col-9' onClick={()=> getData()}>View Report</Button>
                         {/*<Button onClick={openModal} color= "danger">Detail</Button>*/}
                     </td>
-                    <td>dr. Chandni Nayak</td>
+                    <td>Biotech Laboratory</td>
                 </tr>
-                <tr>
-                    <th scope="row">348559052</th>
-                    <td>21/03/2018</td>
-                    <td>Food poisening, Vomiting and weakness in body.</td>
-                    <td>dr. Kinnari Parmar</td>
-                </tr>
-                <tr>
-                    <th scope="row">348539040</th>
-                    <td>21/03/2019</td>
-                    <td>Chikungunya, Symptoms shown in patient are fever ,joint pain ,headache, muscle pain, joint swelling and rash.</td>
-                    <td>dr. Hitesh shah</td>
-                </tr>
-                <tr>
-                    <th scope="row">348539041</th>
-                    <td>01/06/2020</td>
-                    <td>Covid-19 positive, High favour and weakness in body</td>
-                    <td>dr. Jeetu patel</td>
-                </tr>
+                
             </tbody>
         </Table>
     );

@@ -19,11 +19,12 @@ export const Signin = (user) => {
 
             localStorage.setItem( 'token', token );
             localStorage.setItem( 'user', JSON.stringify(user1) );
+            localStorage.setItem( 'type', user.userType );
 
             dispatch({
                 type: authConstant.LOGIN_SUCCESS,
                 payload: {
-                    token, user
+                    token, user, type: user.userType
                 }
             });
         } else {
@@ -60,17 +61,17 @@ export const isUserLoggedIn = () => {
 export const signOut = () => {
     return async (dispatch) => {
         dispatch({ type: authConstant.SIGNOUT_REQUEST });
-        const res = await axiosInstant.post('/admin/signout');
+        //const res = await axiosInstant.post('/admin/signout');
 
-        if(res.status === 200){
+        // if(res.status === 200){
             localStorage.clear();
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            dispatch({
+                dispatch({
                 type: authConstant.SIGNOUT_SUCCESS,
             });
-        } else {
-            dispatch({ type: authConstant.SIGNOUT_FAILURE, payload: { error: res.data.error }});
-        }
+        // } else {
+        //     dispatch({ type: authConstant.SIGNOUT_FAILURE, payload: { error: res.data.error }});
+        // }
     }
 }

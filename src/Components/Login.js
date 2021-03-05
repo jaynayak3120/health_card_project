@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { Button } from "@material-ui/core";
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -36,10 +36,15 @@ function Login() {
     }
 
     const auth = useSelector(state => state.auth)
-    if(auth.authenticate && !auth.patientID) {
+    
+    if(auth.authenticate && !auth.doctorID && auth.type === 'doctor') {
+      return <Redirect to='/doctor' />
+    }
+    if(auth.authenticate && !auth.patientID && auth.type === 'user') {
       return <Redirect to='/patient/cases' />
     } 
-
+    
+    
     return(
         <div className='container-fluid'>
             <ThemeProvider theme={theme}>
