@@ -63,8 +63,8 @@ function Login() {
                           <option default value=''>Select User Type</option>
                           <option value='user'>Patient</option>
                           <option value='doctor'>Doctor</option>
-                          <option value='pharmacist'>Pharacist</option>
-                          <option value='laboratory'>Laboratory</option>
+                          {/* <option value='pharmacist'>Pharacist</option>
+                          <option value='laboratory'>Laboratory</option> */}
                         </Input>
                       </FormGroup>
                       <FormGroup>

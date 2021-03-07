@@ -7,13 +7,13 @@ function Report() {
     const [pdfData, setPDFData] = useState(null);
 
     const getData = () => {
-        const params = "D://NodeJS//healthcard-backend//src//reports//Heart_Report.pdf"
+        const params = "D://Project//backend//src//reports//170170107049_DMBI.pdf"
         console.log(params);
         const url = {
-            reportID: 180108002,
-            report: 1
+            reportID: 180108006,
+            report: 0
         }
-        axiosInstant.get(`lab/downloadfile/`+ '180108005/0', {
+        axiosInstant.get(`lab/downloadfile/`+ '180108006/0', {
             responseType: 'arraybuffer',
             headers: {
                 Accept: 'application/pdf',
@@ -23,7 +23,7 @@ function Report() {
             console.log(pdfData);
             const file = new Blob([pdfData],{ type: "application/pdf", filename: 'sample.pdf' , __filename: "sample.pdf" });
             const fileUrl = URL.createObjectURL(file);
-            //window.open(fileUrl, '_blank')
+            window.open(fileUrl, '_blank')
             console.log(resp);
             console.log('Done')
         })

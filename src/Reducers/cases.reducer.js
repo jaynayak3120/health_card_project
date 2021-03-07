@@ -10,7 +10,7 @@ export default function casesReducer(state=intitialState, action) {
             return { ...state }
         case caseConstant.PATIENT_FETCH_CASES_SUCCESS:
             console.log('cases reducer',action.payload );
-            return { cases: action.payload }
+            return {cases: action.payload}
         case caseConstant.PATIENT_FETCH_CASES_FAILURE:
             return { ...state }
         default:

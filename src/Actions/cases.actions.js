@@ -31,21 +31,16 @@ export const FetchPatientCases = (userID) => {
 
         try {
             const res = await axiosInstant.get(`user/${userID}`);
-            localStorage.setItem('currentPatient', JSON.stringify(res.data))
-            console.log('patient',res.data);
-            const currentPatient = JSON.parse(localStorage.getItem('currentPatient'))
-            try {
+            localStorage.setItem('currentPatient', JSON.stringify(res.data.patient))
+            console.log('patient',res.data.patient);
+            const currentPatient = res.data.patient
                 if(currentPatient.patientID){
-                    const res = await axiosInstant.get(`doctor/${user.doctorID}/${currentPatient.patientID}/cases`);
-                    console.log('fatch patient cases action',res.data)
-                    const cases = res.data
+                    const res1 = await axiosInstant.get(`doctor/${user.doctorID}/${currentPatient.patientID}/cases`);
+                    console.log('fatch patient cases action',res1.data)
+                    const cases = res1.data.cases
+                    console.log('fetch patient cases action',cases);
                     dispatch({ type: caseConstant.PATIENT_FETCH_CASES_SUCCESS, payload: cases })   
                 }
-            } catch (e) {
-                dispatch({ type: caseConstant.PATIENT_FETCH_CASES_FAILURE, payload: e})
-                console.log(e);
-            }
-    
             console.log('fetch patient cases')
         } catch (e) {
             console.log(e);
@@ -61,11 +56,12 @@ export const DoctorCases = () => {
             if(user.doctorID){
                 const res = await axiosInstant.get(`doctor/${user.doctorID}/cases`);
                 console.log(res.data)
-                res.data.cases.forEach((data) => {
-                    const d = new Date(data.dateOfReport)
-                    console.log(d);
-                })
-                //dispatch({ type: caseConstant.DOCTOR_FETCH_CASES_SUCCESS, payload: cases })   
+                // res.data.cases.forEach((data) => {
+                //     const d = new Date(data.dateOfReport)
+                //     console.log(d);
+                // })
+                const cases = res.data.cases
+                dispatch({ type: caseConstant.DOCTOR_FETCH_CASES_SUCCESS, payload: cases })   
             }
         } catch (e) {
             console.log(e);
@@ -81,11 +77,11 @@ export const DoctorPostCase = (cases) => {
         dispatch({ type: caseConstant.DOCTOR_POST_CASES_REQUEST })
         const user = JSON.parse(localStorage.getItem('user'))
         try {
-            const res = await axiosInstant.post(`${user.doctorID}/${cases.patientID}/addCase`, {
-                body: cases
+            const res = await axiosInstant.post(`doctor/${user.doctorID}/`+cases.userID+`/addCase`, {
+                cases
             });
             if(res.status === 201){
-                dispatch({ type: caseConstant.DOCTOR_POST_CASES_SUCCESS, payload: res.data})
+                dispatch({ type: caseConstant.DOCTOR_POST_CASES_SUCCESS, payload: res.data.case})
             } else {
                 dispatch({ type: caseConstant.DOCTOR_POST_CASES_FAILURE })
             }

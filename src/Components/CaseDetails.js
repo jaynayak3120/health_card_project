@@ -7,7 +7,6 @@ function CaseDetails(props) {
    // const [cases, setCases] = useState([]);
     const dispatch = useDispatch();
     const loadCases = async () => {
-        //await dispatch()
         dispatch(PatientCases())      
         console.log('data');    
     }
@@ -40,8 +39,7 @@ function CaseDetails(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    
-
+{/*                     
                     <tr>
                         <th scope="row">348539039</th>
                         <td>2017-07-01T18:30:00.000Z</td>
@@ -65,9 +63,9 @@ function CaseDetails(props) {
                         <th scope="row">348539041</th>
                         <td>2013-05-10T18:30:00.000Z</td>
                         <td>Covid-19 positive, High favour and weakness in body</td>
-                        <td>dr. Jeetu patel</td>
-                    </tr>
-
+                    <td>dr. Jeetu patel</td> 
+                    </tr>*/}
+                    
                     {casesRow}
                 </tbody>
             </Table>

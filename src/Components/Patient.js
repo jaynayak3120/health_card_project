@@ -28,7 +28,7 @@ function Patient() {
                                 <h3>Name: {user.patientName}</h3>
                                 <h5>Blood Group: {user.bloodGrp}</h5>
                         </div>
-                        <div className='offset-7'><Button color='danger' href='/login' onClick={onLogout}>Log Out</Button></div>
+                        <div className='offset-7'><Button color='danger' href='/login' onClick={onLogout}>Sign Out</Button></div>
                     </div>
                 </div>
             </Jumbotron>
@@ -56,7 +56,7 @@ function Patient() {
                 
                 <Switch>
                     <Route path="/patient/pres" component={Prescription} />
-                    <Route path="/patient/casedetail" component={()=> <CaseDetails PatientCases={PatientCases} />} />
+                    <Route path="/patient/casedetail" component={CaseDetails} />
                     <Route path="/patient/report" component={Report} />
                     <Redirect to="/patient/casedetail" />
                 </Switch>  

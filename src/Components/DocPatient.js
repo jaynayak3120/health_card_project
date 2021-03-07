@@ -6,6 +6,7 @@ import Report from './Report';
 import { Button, Modal, ModalBody, ModalHeader, Form, Jumbotron, FormGroup, Label, Input } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { DoctorPostCase, FetchPatientCases } from '../Actions/cases.actions';
+import DocCasesDet from './DocCasesDet';
 
 function DocPatient() {
     
@@ -27,10 +28,10 @@ function DocPatient() {
     const submitCases = (e) => {
         e.preventDefault();
         const cases = {
-            caseDetail: caseDetail,
-            prescDetail: prescDetail,
-            userId: patient.patientID,
-            dateOfEntry: new Date()
+            "caseDetail": caseDetail,
+            "prescDetail": prescDetail,
+            "userId": patient.patientID,
+            "dateOfEntry": new Date()
         }
         dispatch(DoctorPostCase(cases))
         setCaseDetail('')
@@ -38,7 +39,7 @@ function DocPatient() {
     }
 
     useEffect(() => {
-        dispatch(FetchPatientCases(patient.patientID))
+        dispatch(FetchPatientCases(12349))
     })
 
     return (
@@ -47,9 +48,9 @@ function DocPatient() {
             <div className='container-fluid'>
                 <div className='row patientDetail'>
                         <div className='col-4'>
-                            <h3>Patient ID: 12349</h3>
-                            <h3>Name: Dhruv</h3>
-                            <h5>Blood Group: AB+ve</h5>
+                            <h3>Patient ID: </h3>
+                            <h3>Name: </h3>
+                            <h5>Blood Group: </h5>
                     </div>
                     <div className='offset-7'><Button color='success' href="/doctor">Home</Button></div>
                 </div>
@@ -99,9 +100,9 @@ function DocPatient() {
 
             <Switch>
                     <Route path="/doctor/patient/pres" component={Prescription} />
-                    <Route path="/doctor/patient/casedetail" component={()=> <CaseDetails type='doc' PatientCases={FetchPatientCases} />} />
+                    <Route path="/doctor/patient/casedetail" component={DocCasesDet} />
                     <Route path="/doctor/patient/report" component={Report} />
-                    <Redirect to="/doctor/patient/casedetail" />
+                    <Redirect to="/doctor/patient/casedetail" />    
             </Switch>  
         </div>
     </div>
