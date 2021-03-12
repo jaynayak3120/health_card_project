@@ -3,10 +3,11 @@ import { Switch ,Route, Redirect } from "react-router";
 import CaseDetails from "./CaseDetails";
 import Prescription from "./Prescription";
 import Report from './Report';
-import { Button, Modal, ModalBody, ModalHeader, Form, Jumbotron, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, Form, Jumbotron, FormGroup, Label, Input, NavLink } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../Actions/auth.action';
-import { PatientCases } from '../Actions/cases.actions';
+import { PatientCases } from '../Actions';
+import { Link } from '@material-ui/core';
 
 function Patient() {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -40,7 +41,7 @@ function Patient() {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item ml-3 active">
-                                <a class="nav-link" href="/patient/casedetail">Case Detail<span class="sr-only">(current)</span></a>
+                                <Link to='/casedetails'></Link><a class="nav-link" href="/patient/casedetail">Case Detail<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item ml-5 active">
                                 <a class="nav-link" href="/patient/pres">Prescription</a>
