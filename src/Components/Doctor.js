@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import {Button, FormGroup, Label, Input, Form} from 'reactstrap';
 import { DoctorCases, FetchPatientCases } from '../Actions/cases.actions';
 
-function DocHome() {    
+function DocHome() {
     const [userID, setUserID] = useState(null);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('user'))
